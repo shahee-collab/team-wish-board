@@ -14,3 +14,7 @@ export const siteOccasionDate =
   (process.env.NEXT_PUBLIC_OCCASION_DATE ??
    process.env.NEXT_PUBLIC_FAREWELL_DATE ??
    siteOccasionDateDefault).trim();
+
+/** Board ID — isolates wishes when multiple boards share one database. */
+export const siteBoardId =
+  process.env.NEXT_PUBLIC_BOARD_ID ?? "default";

@@ -19,7 +19,7 @@ export default function LayoutShell({
   return (
     <WishModalProvider>
       {darkUI && <Starfield />}
-      {darkUI && <SpotlightBackground />}
+      <SpotlightBackground darkUI={darkUI} />
 
       <Header teamName={teamName} occasionDate={occasionDate} darkUI={darkUI} />
       <div className="mx-auto max-w-6xl px-4 pt-24 pb-8 sm:px-6 sm:pt-28 lg:px-8" style={{ position: "relative", zIndex: 1 }}>

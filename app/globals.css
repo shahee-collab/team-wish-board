@@ -33,6 +33,23 @@ body {
   min-height: 100vh;
 }
 
+/* Dot grid that fades out towards screen edges (light mode only) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(circle, rgba(9, 30, 66, 0.10) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 50%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 50%, transparent 100%);
+}
+
+html[data-ui="dark"] body::after {
+  display: none;
+}
+
 /* ─── Masonry column grid ─────────────────────────────────── */
 .wish-masonry {
   columns: 1;

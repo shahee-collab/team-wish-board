@@ -1,5 +1,5 @@
 import { neon } from "@neondatabase/serverless";
-import { siteOccasionDate } from "./site";
+import { siteOccasionDate, siteBoardId } from "./site";
 import type { Wish, WishesData } from "./types";
 
 function getSql() {
@@ -36,7 +36,7 @@ function rowToWish(row: DbRow): Wish {
 
 export async function getAllWishes(): Promise<Wish[]> {
   const sql = getSql();
-  const rows = (await sql`SELECT * FROM wishes ORDER BY timestamp DESC`) as DbRow[];
+  const rows = (await sql`SELECT * FROM wishes WHERE board_id = ${siteBoardId} ORDER BY timestamp DESC`) as DbRow[];
   return rows.map(rowToWish);
 }
 
@@ -54,8 +54,8 @@ export async function addWish(
   const id = crypto.randomUUID();
   const timestamp = Date.now();
   await sql`
-    INSERT INTO wishes (id, name, message, image, card_color, illustration, timestamp, reactions, reaction_breakdown)
-    VALUES (${id}, ${wish.name}, ${wish.message}, ${wish.image ?? null}, ${wish.cardColor ?? null}, ${wish.illustration ?? null}, ${timestamp}, 0, NULL)
+    INSERT INTO wishes (id, board_id, name, message, image, card_color, illustration, timestamp, reactions, reaction_breakdown)
+    VALUES (${id}, ${siteBoardId}, ${wish.name}, ${wish.message}, ${wish.image ?? null}, ${wish.cardColor ?? null}, ${wish.illustration ?? null}, ${timestamp}, 0, NULL)
   `;
   return {
     ...wish,

@@ -10,7 +10,7 @@ export function getBoardTitle(name: string): string {
 
   switch (occasionType) {
     case "farewell":
-      return `The ${name} Effect`;
+      return `Here's to you, ${name}`;
     case "birthday":
       return `Happy Birthday, ${name}!`;
     case "anniversary":
