@@ -1,0 +1,43 @@
+{
+  "name": "team-wish-board",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "verify": "npm run lint && npm run type-check",
+    "clean": "rm -rf .next node_modules",
+    "fresh": "npm run clean && npm install",
+    "seed": "node scripts/seed-test-data.js",
+    "setup": "node scripts/setup.mjs"
+  },
+  "dependencies": {
+    "@atlaskit/button": "^23.9.7",
+    "@atlaskit/primitives": "^18.0.0",
+    "@atlaskit/tokens": "^11.0.0",
+    "@vercel/blob": "^2.3.0",
+    "@neondatabase/serverless": "^0.9.0",
+    "canvas-confetti": "^1.9.4",
+    "date-fns": "^3.6.0",
+    "framer-motion": "^11.11.0",
+    "next": "14.2.18",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.18",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

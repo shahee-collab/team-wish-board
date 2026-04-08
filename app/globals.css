@@ -1,0 +1,475 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0052cc;
+  --border: #dfe1e6;
+  --shell-header-bg: #ffffff;
+  --shell-modal-bg: #ffffff;
+  --shell-modal-shadow: 0 20px 60px rgba(9, 30, 66, 0.22), 0 4px 16px rgba(9, 30, 66, 0.1);
+  --shell-backdrop: rgba(9, 30, 66, 0.54);
+  --shell-close-hover: #f4f5f7;
+  --reaction-stroke: #6b778c;
+  --reaction-active: #e0245e;
+  --board-error-bg: rgba(255, 255, 255, 0.92);
+  --board-error-border: #dfe1e6;
+  --board-error-text: #6b6e76;
+  --board-error-btn: #0052cc;
+  --card-message-bg: #ffffff;
+  --card-action-bg: rgba(255, 255, 255, 0.92);
+  --card-action-shadow: 0 1px 4px rgba(9, 30, 66, 0.18);
+  --preview-bg: #ffffff;
+  --tab-bg: var(--ds-background-neutral, #F4F5F7);
+  --tab-active-bg: var(--ds-background-selected, #DEEBFF);
+  --tab-active-color: var(--ds-text-selected, #0052CC);
+  --tab-inactive-color: var(--ds-text-subtle, #44546F);
+}
+
+/* ─── Background ─────────────────────────────────────────── */
+body {
+  color: var(--ds-text, #292A2E);
+  background-color: var(--ds-background-neutral, #F4F5F7);
+  min-height: 100vh;
+}
+
+/* ─── Masonry column grid ─────────────────────────────────── */
+.wish-masonry {
+  columns: 1;
+  column-gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .wish-masonry { columns: 2; }
+}
+
+@media (min-width: 1024px) {
+  .wish-masonry { columns: 3; }
+}
+
+.wish-card-wrapper {
+  break-inside: avoid;
+  margin-bottom: 1.25rem;
+}
+
+/* ─── Wish card (Atlassian style) ────────────────────────── */
+.wish-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid var(--ds-border, #DFE1E6);
+  box-shadow: 0 1px 1px rgba(9,30,66,0.08), 0 0 0 1px rgba(9,30,66,0.04);
+  overflow: visible;
+  width: 100%;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.wish-card:hover {
+  box-shadow: 0 4px 8px rgba(9,30,66,0.12), 0 0 0 1px rgba(9,30,66,0.06);
+}
+
+/* Ghost postcard */
+.postcard-ghost {
+  position: relative;
+  background: var(--ds-background-neutral, #F4F5F7);
+  border-radius: 8px;
+  border: 2px dashed var(--ds-border, #DFE1E6);
+  width: 100%;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.postcard-ghost:hover {
+  border-color: var(--ds-border-focused, #0052CC);
+  background: var(--ds-background-neutral-hovered, #EBECF0);
+}
+
+.board-error-panel {
+  border-color: var(--board-error-border);
+  background: var(--board-error-bg);
+}
+
+/* ─── Accessibility ──────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-6px); }
+  30% { transform: translateX(5px); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(3px); }
+  75% { transform: translateX(-2px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Dark UI (NEXT_PUBLIC_UI_VARIANT=dark)
+   ═══════════════════════════════════════════════════════════ */
+
+html[data-ui="dark"] {
+  color-scheme: dark;
+
+  /* Core palette */
+  --dark-bg-base: #0a0a0b;
+  --dark-bg-surface: #141415;
+  --dark-bg-elevated: #1a1a1c;
+  --dark-bg-panel: #1e1e20;
+  --dark-bg-hover: #252528;
+  --dark-bg-input: #0f0f10;
+  --dark-border: #2a2a2d;
+  --dark-border-subtle: #222225;
+  --dark-border-bright: #3a3a3e;
+  --dark-text: #f4f4f5;
+  --dark-text-secondary: #b0b0b8;
+  --dark-text-muted: #6a6a72;
+  --dark-accent: #a78bfa;
+  --dark-accent-dim: rgba(167, 139, 250, 0.15);
+  --dark-accent-glow: rgba(167, 139, 250, 0.25);
+  --dark-danger: #f87171;
+  --dark-success: #34d399;
+
+  /* Map to shell tokens */
+  --primary: #a78bfa;
+  --border: var(--dark-border);
+  --shell-header-bg: var(--dark-bg-surface);
+  --shell-modal-bg: var(--dark-bg-elevated);
+  --shell-modal-shadow: 0 32px 100px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--dark-border), 0 0 60px rgba(167, 139, 250, 0.05);
+  --shell-backdrop: rgba(0, 0, 0, 0.78);
+  --shell-close-hover: var(--dark-bg-hover);
+  --reaction-stroke: var(--dark-text-secondary);
+  --reaction-active: #f472b6;
+  --board-error-bg: var(--dark-bg-elevated);
+  --board-error-border: var(--dark-border);
+  --board-error-text: var(--dark-text-secondary);
+  --board-error-btn: #7c3aed;
+  --card-message-bg: var(--dark-bg-elevated);
+  --card-action-bg: rgba(20, 20, 21, 0.95);
+  --card-action-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --preview-bg: var(--dark-bg-panel);
+  --tab-bg: var(--dark-bg-surface);
+  --tab-active-bg: var(--dark-accent-dim);
+  --tab-active-color: var(--dark-accent);
+  --tab-inactive-color: var(--dark-text-secondary);
+
+  /* Override ADS tokens */
+  --ds-text: var(--dark-text);
+  --ds-text-subtle: var(--dark-text-secondary);
+  --ds-text-subtlest: var(--dark-text-muted);
+  --ds-text-danger: var(--dark-danger);
+  --ds-border: var(--dark-border);
+  --ds-border-focused: var(--dark-accent);
+  --ds-border-danger: var(--dark-danger);
+  --ds-background-neutral: var(--dark-bg-base);
+  --ds-background-neutral-hovered: var(--dark-bg-hover);
+  --ds-background-input: var(--dark-bg-input);
+  --ds-background-selected: var(--dark-accent-dim);
+  --ds-text-selected: var(--dark-accent);
+  --ds-link: #c4b5fd;
+}
+
+/* Body */
+html[data-ui="dark"] body {
+  background: var(--dark-bg-base);
+  color: var(--dark-text);
+}
+
+/* Subtle gradient noise background */
+html[data-ui="dark"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(167, 139, 250, 0.04), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(99, 102, 241, 0.03), transparent);
+}
+
+/* ─── Header: dark title bar ─────────────────────────────── */
+html[data-ui="dark"] header {
+  background: var(--dark-bg-surface) !important;
+  border-bottom-color: var(--dark-border) !important;
+  backdrop-filter: blur(12px) saturate(1.1);
+}
+
+/* ─── Wish cards: editor panels ───────────────────────────── */
+html[data-ui="dark"] .wish-card {
+  background: var(--dark-bg-elevated);
+  border-color: var(--dark-border);
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 0 0 1px var(--dark-border-subtle);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+html[data-ui="dark"] .wish-card:hover {
+  border-color: var(--dark-border-bright);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.55),
+    0 0 0 1px var(--dark-border-bright),
+    0 0 20px rgba(167, 139, 250, 0.04);
+}
+
+/* Ghost cards: empty slots */
+html[data-ui="dark"] .postcard-ghost {
+  background: var(--dark-bg-surface);
+  border-color: var(--dark-border);
+  border-style: dashed;
+  border-radius: 10px;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+html[data-ui="dark"] .postcard-ghost:hover {
+  border-color: var(--dark-accent);
+  background: var(--dark-bg-hover);
+  box-shadow: 0 0 16px var(--dark-accent-dim);
+}
+
+/* Focus ring: violet glow */
+html[data-ui="dark"] :focus-visible {
+  outline: 2px solid var(--dark-accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--dark-accent-dim);
+}
+
+html[data-ui="dark"] .focus-visible\:ring-2:focus-visible {
+  box-shadow: 0 0 0 4px var(--dark-accent-dim) !important;
+}
+
+/* ─── Monospace utility ───────────────────────────────────── */
+html[data-ui="dark"] .font-dark-mono {
+  font-family: var(--font-mono-dark), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* ─── Primary CTA button: purple gradient ────────────────── */
+html[data-ui="dark"] .dark-send-wishes button {
+  background: linear-gradient(180deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%) !important;
+  color: #fafafa !important;
+  border: none !important;
+  border-radius: 6px !important;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(124, 58, 237, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  font-weight: 500 !important;
+  letter-spacing: 0.01em;
+  transition: filter 0.15s, box-shadow 0.15s !important;
+}
+
+html[data-ui="dark"] .dark-send-wishes button:hover {
+  filter: brightness(1.1);
+  box-shadow:
+    0 4px 16px rgba(124, 58, 237, 0.3),
+    0 0 0 1px rgba(124, 58, 237, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* All atlaskit primary buttons in dark mode */
+html[data-ui="dark"] button[data-appearance="primary"] {
+  background: linear-gradient(180deg, #7c3aed 0%, #5b21b6 100%) !important;
+  color: #fafafa !important;
+  border: none !important;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(124, 58, 237, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+html[data-ui="dark"] button[data-appearance="primary"]:hover {
+  filter: brightness(1.1);
+}
+
+html[data-ui="dark"] button[data-appearance="subtle"] {
+  color: var(--dark-text-secondary) !important;
+}
+
+html[data-ui="dark"] button[data-appearance="subtle"]:hover {
+  background: var(--dark-bg-hover) !important;
+  color: var(--dark-text) !important;
+}
+
+/* ─── Error panel ─────────────────────────────────────────── */
+html[data-ui="dark"] .board-error-panel {
+  border-color: var(--dark-border) !important;
+  background: var(--dark-bg-elevated) !important;
+  border-radius: 10px;
+}
+
+/* ─── Modal ──────────────────────────────────────────────── */
+html[data-ui="dark"] [role="dialog"] h2#modal-title {
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Inputs: deep dark with subtle violet focus ──────────── */
+html[data-ui="dark"] input[type="text"],
+html[data-ui="dark"] input[type="search"],
+html[data-ui="dark"] textarea {
+  background: var(--dark-bg-input) !important;
+  color: var(--dark-text) !important;
+  border-color: var(--dark-border) !important;
+  caret-color: var(--dark-accent);
+}
+
+html[data-ui="dark"] input[type="text"]:focus,
+html[data-ui="dark"] input[type="search"]:focus,
+html[data-ui="dark"] textarea:focus {
+  border-color: var(--dark-accent) !important;
+  box-shadow: 0 0 0 3px var(--dark-accent-dim), 0 0 12px rgba(167, 139, 250, 0.08);
+}
+
+html[data-ui="dark"] input::placeholder,
+html[data-ui="dark"] textarea::placeholder {
+  color: var(--dark-text-muted) !important;
+}
+
+/* ─── Scrollbar (webkit) ──────────────────────────────────── */
+html[data-ui="dark"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html[data-ui="dark"] ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html[data-ui="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--dark-border);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+html[data-ui="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-border-bright);
+  background-clip: padding-box;
+}
+
+/* ─── Tab bar (illustration / upload / gif) ───────────────── */
+html[data-ui="dark"] .media-tab-bar {
+  border-color: var(--dark-border) !important;
+  background: var(--dark-bg-surface);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ─── Card preview panel ──────────────────────────────────── */
+html[data-ui="dark"] .preview-panel {
+  background: var(--dark-bg-surface) !important;
+  border-left-color: var(--dark-border) !important;
+}
+
+/* ─── Code-style inline highlights ────────────────────────── */
+html[data-ui="dark"] code {
+  background: var(--dark-bg-hover);
+  color: var(--dark-accent);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+/* ─── Modal panel ────────────────────────────────────────── */
+html[data-ui="dark"] .dark-modal-panel {
+  border-radius: 12px;
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-bg-elevated) !important;
+}
+
+html[data-ui="dark"] .dark-modal-panel > div:first-child {
+  border-bottom-color: var(--dark-border) !important;
+  background: var(--dark-bg-surface);
+}
+
+/* Illustration picker grid items */
+html[data-ui="dark"] .dark-modal-panel button[aria-label] img {
+  filter: brightness(0.92) saturate(0.9);
+}
+
+/* Color swatch ring in dark mode */
+html[data-ui="dark"] .dark-modal-panel button[aria-label][style*="border-radius: 50%"] {
+  border-color: transparent !important;
+}
+
+/* Success state */
+html[data-ui="dark"] .dark-modal-panel .flex.flex-col.items-center.justify-center {
+  color: var(--dark-text);
+}
+
+
+
+/* ─── Modal text: force readable on dark ──────────────────── */
+html[data-ui="dark"] .dark-modal-panel,
+html[data-ui="dark"] .dark-modal-panel * {
+  color: var(--dark-text);
+}
+
+html[data-ui="dark"] .dark-modal-panel label,
+html[data-ui="dark"] .dark-modal-panel p.text-sm.font-semibold,
+html[data-ui="dark"] .dark-modal-panel h2,
+html[data-ui="dark"] .dark-modal-panel .font-semibold {
+  color: var(--dark-text) !important;
+}
+
+html[data-ui="dark"] .dark-modal-panel p.text-xs,
+html[data-ui="dark"] .dark-modal-panel .text-xs,
+html[data-ui="dark"] .dark-modal-panel span.text-xs {
+  color: var(--dark-text-secondary) !important;
+}
+
+html[data-ui="dark"] .dark-modal-panel [role="alert"] {
+  color: var(--dark-danger) !important;
+}
+
+html[data-ui="dark"] .dark-modal-panel .text-sm {
+  color: var(--dark-text) !important;
+}
+
+/* Close button */
+html[data-ui="dark"] .dark-modal-panel button[aria-label="Close"] {
+  color: var(--dark-text-secondary) !important;
+}
+
+html[data-ui="dark"] .dark-modal-panel button[aria-label="Close"]:hover {
+  color: var(--dark-text) !important;
+  background: var(--dark-bg-hover) !important;
+}
+
+/* Preview card message area in dark */
+html[data-ui="dark"] .dark-modal-panel .preview-panel .rounded-xl {
+  border-color: var(--dark-border) !important;
+}
+
+html[data-ui="dark"] .dark-modal-panel .preview-panel p {
+  color: var(--dark-text) !important;
+}
+
+/* Tab buttons text */
+html[data-ui="dark"] .dark-modal-panel .media-tab-bar button {
+  border-color: var(--dark-border) !important;
+}

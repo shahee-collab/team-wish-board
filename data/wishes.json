@@ -1,0 +1,31 @@
+{
+  "wishes": [
+    {
+      "name": "Alice",
+      "message": "Wishing you all the very best! It's been a pleasure working with you.",
+      "id": "sample-001",
+      "timestamp": 1700000000000,
+      "reactions": 3,
+      "cardColor": "#2672C8",
+      "illustration": "confetti"
+    },
+    {
+      "name": "Bob",
+      "message": "You'll be missed! Good luck on your next adventure.",
+      "id": "sample-002",
+      "timestamp": 1700000100000,
+      "reactions": 5,
+      "cardColor": "#5A9A28",
+      "illustration": "hifive"
+    },
+    {
+      "name": "Charlie",
+      "message": "Thanks for everything! Keep being awesome.",
+      "id": "sample-003",
+      "timestamp": 1700000200000,
+      "reactions": 2,
+      "cardColor": "#BE70CC",
+      "illustration": "stars"
+    }
+  ]
+}
